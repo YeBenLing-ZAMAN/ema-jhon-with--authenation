@@ -38,6 +38,10 @@
     border: none;
     border-radius: 5px;
     font-size: 20px;
+    cursor: pointer;
+}
+.form-submit:hover{
+    background-color: #fdc167;
 }
 
 .form-link{
