@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import google from '../../images/google.png'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 
@@ -17,6 +17,9 @@ const SignUp = () => {
     /* firebasd hooks state used */
     const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth)
 
+    /* log in hooks with google */
+    const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
+
     /* event gulake set koro tumar state gula te */
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -28,7 +31,7 @@ const SignUp = () => {
         setConfirmPassword(event.target.value);
     }
 
-    if (user) {
+    if (user || userGoogle) {
         naviagte('/home');
     }
 
@@ -80,7 +83,7 @@ const SignUp = () => {
                     <p>OR</p>
                     <div className='line'></div>
                 </div>
-                <button className='google-login-container'><img src={google} alt="" /> <p> continue with google</p></button>
+                <button onClick={()=>signInWithGoogle()} className='google-login-container'><img src={google} alt="" /> <p> continue with google</p></button>
             </div>
         </div>
     );

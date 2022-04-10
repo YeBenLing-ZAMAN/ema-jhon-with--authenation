@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LogIn.css';
 import google from '../../images/google.png';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const LogIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    /* use hooks for github */
+    /* use hooks for use loging email and password from github */
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    /* log in hooks with google */
+    const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
 
 
@@ -30,7 +33,7 @@ const LogIn = () => {
         signInWithEmailAndPassword(email, password);
     }
 
-    if (user) {
+    if (user || userGoogle) {
         navigate('/');
     }
 
@@ -62,7 +65,7 @@ const LogIn = () => {
                     <p>OR</p>
                     <div className='line'></div>
                 </div>
-                <button className='google-login-container'><img src={google} alt="" /> <p> continue with google</p></button>
+                <button onClick={() => signInWithGoogle()} className='google-login-container'><img src={google} alt="" /> <p> continue with google</p></button>
             </div>
         </div>
     );
