@@ -15,5 +15,18 @@
     margin-left: 36px;
 }
 .header a:hover{
-    color: orange;
+    color: #FFE0B3;
+}
+
+.signout-button{
+    padding: 5px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+
+    background-color: #FFE0B3;
+}
+.signout-button:hover{
+    background-color: orange;
 }
