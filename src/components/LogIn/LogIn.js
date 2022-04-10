@@ -1,29 +1,64 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './LogIn.css';
 import google from '../../images/google.png';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const LogIn = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    /* use hooks for github */
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+    const navigate = useNavigate();
+
+
+    const handleEmailBlur = event => {
+        setEmail(event.target.value);
+    }
+    const handlePasswordBlur = event => {
+        setPassword(event.target.value);
+    }
+    const handleUserLogIn = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(email, password);
+    }
+
+    if (user) {
+        navigate('/');
+    }
+
+
     return (
         <div className='form-container'>
             <div>
                 <h2 className='form-title'>Login</h2>
-                <form>
+                <form onSubmit={handleUserLogIn}>
                     <div className='input-group'>
                         <label htmlFor="email">Eamil</label>
-                        <input type="eamil" name='email' id='' />
+                        <input onBlur={handleEmailBlur} type="eamil" name='email' id='' />
                     </div>
                     <div className='input-group'>
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="" />
+                        <input onBlur={handlePasswordBlur} type="password" name="password" id="" />
                     </div>
+                    <p style={{ color: "red" }}>{error?.message}</p>
+                    {
+                        loading && <p>Loading....</p>
+                    }
                     <input className='form-submit' type="submit" value="login" />
                 </form>
                 <p>
                     New to ema-jhon? <Link className='form-link' to='/signup'>Create an account</Link>
                 </p>
                 <div className='line-container'>
-                   <div className='line'></div>
+                    <div className='line'></div>
                     <p>OR</p>
                     <div className='line'></div>
                 </div>
