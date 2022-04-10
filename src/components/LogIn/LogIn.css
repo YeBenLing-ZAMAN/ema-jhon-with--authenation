@@ -11,7 +11,7 @@
 
 .form-title {
     font-size: 35px;
-    color: gray;
+    color: rgb(189, 186, 186);
     font-weight: 400;
 }
 .input-group{
@@ -26,10 +26,11 @@
 .input-group input {
     width: 415px;
     height: 55px;
-    border: 1 solid #95A0A7;
+    border: 1 solid #e9f0f5;
     box-sizing: border-box;
     border-radius: 5px;
     font-size: 24px;
+    padding-left: 10px;
 }
 .form-submit{
     width: 415px;
