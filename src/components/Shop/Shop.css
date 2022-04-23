@@ -11,6 +11,11 @@
 .cart-container{
     background-color: rgba(255, 153, 0, 0.3);
 }
+.pagination-container{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
 
 .pagination-container button{
     margin-right: 10px;
